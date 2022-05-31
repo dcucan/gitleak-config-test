@@ -134,13 +134,6 @@ title = "gitleaks config"
         Group = "2"
 
 [[rules]]
-	description = "Port"
-	regex = '''(?i)port(.{0,4})?[0-9]{1,10}'''
-	[rules.allowlist]
-		regexes = ['''(?i)port ''']
-		description = "ignore export "
-
-[[rules]]
 	description = "Email"
 	regex = '''[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}'''
 	tags = ["email"]
