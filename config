@@ -2,14 +2,12 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "AWS Access Key"
-	regex = 
-'''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
+	regex = '''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
 	tags = ["key", "AWS"]
 
 [[rules]]
 	description = "AWS cred file info"
-	regex = 
-'''(?i)(aws_access_key_id|aws_secret_access_key)(.{0,20})?=.[0-9a-zA-Z\/+]{20,40}'''
+	regex = '''(?i)(aws_access_key_id|aws_secret_access_key)(.{0,20})?=.[0-9a-zA-Z\/+]{20,40}'''
 	tags = ["AWS"]
 
 [[rules]]
@@ -19,14 +17,12 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "AWS MWS key"
-	regex = 
-'''amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
+	regex = '''amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
 	tags = ["key", "AWS", "MWS"]
 
 [[rules]]
 	description = "Facebook Secret Key"
-	regex = 
-'''(?i)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}['\"]'''
+	regex = '''(?i)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}['\"]'''
 	tags = ["key", "Facebook"]
 
 [[rules]]
@@ -46,8 +42,7 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "Github"
-	regex = 
-'''(?i)github(.{0,20})?(?-i)['\"][0-9a-zA-Z]{35,40}['\"]'''
+	regex = '''(?i)github(.{0,20})?(?-i)['\"][0-9a-zA-Z]{35,40}['\"]'''
 	tags = ["key", "Github"]
 
 [[rules]]
@@ -82,14 +77,12 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "Heroku API key"
-	regex = 
-'''(?i)heroku(.{0,20})?['"][0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}['"]'''
+	regex = '''(?i)heroku(.{0,20})?['"][0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}['"]'''
 	tags = ["key", "Heroku"]
 
 [[rules]]
 	description = "MailChimp API key"
-	regex = 
-'''(?i)(mailchimp|mc)(.{0,20})?['"][0-9a-f]{32}-us[0-9]{1,2}['"]'''
+	regex = '''(?i)(mailchimp|mc)(.{0,20})?['"][0-9a-f]{32}-us[0-9]{1,2}['"]'''
 	tags = ["key", "Mailchimp"]
 
 [[rules]]
@@ -109,14 +102,12 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "Slack Webhook"
-	regex = 
-'''https://hooks.slack.com/services/T[a-zA-Z0-9_]{8}/B[a-zA-Z0-9_]{8}/[a-zA-Z0-9_]{24}'''
+	regex = '''https://hooks.slack.com/services/T[a-zA-Z0-9_]{8}/B[a-zA-Z0-9_]{8}/[a-zA-Z0-9_]{24}'''
 	tags = ["key", "slack"]
 
 [[rules]]
 	description = "Stripe API key"
-	regex = 
-'''(?i)stripe(.{0,20})?['\"][sk|rk]_live_[0-9a-zA-Z]{24}'''
+	regex = '''(?i)stripe(.{0,20})?['\"][sk|rk]_live_[0-9a-zA-Z]{24}'''
 	tags = ["key", "Stripe"]
 
 [[rules]]
@@ -136,12 +127,18 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "Env Var"
-	regex = 
-'''(?i)(apikey|secret|key|api|password|pass|pw|host)['|"]([0-9a-zA-Z-._{}$\/\+=]{4,120})['|"]'''
+	regex = '''(?i)(apikey|secret|key|api|password|pass|pw|host)['|"]([0-9a-zA-Z-._{}$\/\+=]{4,120})['|"]'''
     [[rules.Entropies]]
 	    Min = "3.5"
         Max = "4.7"
         Group = "2"
+
+[[rules]]
+	description = "Port"
+	regex = '''(?i)port(.{0,4})?[0-9]{1,10}'''
+	[rules.allowlist]
+		regexes = ['''(?i)port ''']
+		description = "ignore export "
 
 [[rules]]
 	description = "Email"
@@ -153,8 +150,7 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "Generic Credential"
-	regex = 
-'''(?i)(dbpasswd|dbuser|dbname|dbhost|api_key|apikey|secret|key|api|password|user|guid|hostname|pw|auth)(.{0,20})?['|"]([0-9a-zA-Z-_\/+!{}/=]{20,120})['|"]'''
+	regex = '''(?i)(dbpasswd|dbuser|dbname|dbhost|api_key|apikey|secret|key|api|password|user|guid|hostname|pw|auth)(.{0,20})?['|"]([0-9a-zA-Z-_\/+!{}/=]{20,120})['|"]'''
     tags = ["key", "API", "generic"]
     [[rules.Entropies]]
         Min = "3.5"
@@ -166,8 +162,7 @@ title = "gitleaks config"
 		regexes = [
 		    '''xox[baprs]-([0-9a-zA-Z]{10,48})''',
 		    '''(?i)(.{0,20})?['"][0-9a-f]{32}-us[0-9]{1,2}['"]''',
-		    
-'''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
+		    '''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
 		]
 
 [[rules]]
@@ -194,8 +189,7 @@ title = "gitleaks config"
 
 [[rules]]
 	description = "WP-Config"
-	
-regex='''define(.{0,20})?(DB_CHARSET|NONCE_SALT|LOGGED_IN_SALT|AUTH_SALT|NONCE_KEY|DB_HOST|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|DB_NAME|DB_USER)(.{0,20})?['|"].{10,120}['|"]'''
+	regex='''define(.{0,20})?(DB_CHARSET|NONCE_SALT|LOGGED_IN_SALT|AUTH_SALT|NONCE_KEY|DB_HOST|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|DB_NAME|DB_USER)(.{0,20})?['|"].{10,120}['|"]'''
 	tags = ["key", "API", "generic"]
 
 [[rules]]
